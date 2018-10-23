@@ -1,13 +1,9 @@
 
 #include "show.h"
 #include "data.h"
-#include "delay.h"
 #include "string.h"
-#include "io.h"
-#include "tpswitch.h"
 #include "ostest.h"
-#include "lcd12864.h"
-#include "din.h"
+#include "bsp.h"
 
 #define WELCOME_STR         (u8*)"◊º±∏≤‚ ‘"
 #define TEST_STR            (u8*)"≤‚ ‘÷–.."

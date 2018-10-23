@@ -1,6 +1,6 @@
 #include "pwrctr.h"
 #include "74HC595.h"
-#include "gpio.h"
+#include "io.h"
 
 #define	SW_1D8V			SW_1D8V_PORT, SW_1D8V_PIN
 #define SW_3D3V			SW_3D3V_PORT, SW_3D3V_PIN
@@ -8,9 +8,12 @@
 
 uint8_t PWR_OUT_Status = 0;
 
-void PWR24V_CTR(uint8_t output)
+void PWR24V_CTR(uint8_t output, uint8_t state)
 {
-	PWR_OUT_Status &= output;
+    if(state)
+        PWR_OUT_Status |= output;
+    else
+        PWR_OUT_Status &= output;
 	HC595SendData(PWR_OUT, PWR_OUT_Status);
 }
 

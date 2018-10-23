@@ -1,5 +1,5 @@
 #include "sys.h"
-#include "gpio.h"
+#include "io.h"
 #include "74HC595.h"
 #include "delay.h"
 
@@ -64,8 +64,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		//Step 3：RCLK发生一次上升沿，把数据发出去
 		GPIO_ResetBits(A595_RCLK);	
 		delay_us(10);
-		GPIO_SetBits(A595_RCLK);	
-		GPIO_ResetBits(A595_RCLK);		
+		GPIO_SetBits(A595_RCLK);			
 	}
 	else if(type == SW1_B)
 	{
@@ -84,8 +83,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		//Step 3：RCLK发生一次上升沿，把数据发出去
 		GPIO_ResetBits(B595_RCLK);	
 		delay_us(10);
-		GPIO_SetBits(B595_RCLK);	
-		GPIO_ResetBits(B595_RCLK);			
+		GPIO_SetBits(B595_RCLK);			
 	}
 	else if(type == SW2_A)
 	{
@@ -104,8 +102,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		//Step 3：RCLK发生一次上升沿，把数据发出去
 		GPIO_ResetBits(C595_RCLK);	
 		delay_us(10);
-		GPIO_SetBits(C595_RCLK);	
-		GPIO_ResetBits(C595_RCLK);			
+		GPIO_SetBits(C595_RCLK);			
 	}	
 	else if(type == SW2_B)
 	{
@@ -124,8 +121,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		//Step 3：RCLK发生一次上升沿，把数据发出去
 		GPIO_ResetBits(D595_RCLK);	
 		delay_us(10);
-		GPIO_SetBits(D595_RCLK);	
-		GPIO_ResetBits(D595_RCLK);			
+		GPIO_SetBits(D595_RCLK);			
 	}	
 	else if(type == SW3_A)
 	{
@@ -144,8 +140,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		//Step 3：RCLK发生一次上升沿，把数据发出去
 		GPIO_ResetBits(E595_RCLK);	
 		delay_us(10);
-		GPIO_SetBits(E595_RCLK);	
-		GPIO_ResetBits(E595_RCLK);		
+		GPIO_SetBits(E595_RCLK);		
 	}	
 	else if(type == SW3_B)
 	{
@@ -164,8 +159,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		//Step 3：RCLK发生一次上升沿，把数据发出去
 		GPIO_ResetBits(F595_RCLK);	
 		delay_us(10);
-		GPIO_SetBits(F595_RCLK);	
-		GPIO_ResetBits(F595_RCLK);			
+		GPIO_SetBits(F595_RCLK);			
 	}	
 	else if(type == SW4_A)
 	{
@@ -184,8 +178,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		//Step 3：RCLK发生一次上升沿，把数据发出去
 		GPIO_ResetBits(G595_RCLK);	
 		delay_us(10);
-		GPIO_SetBits(G595_RCLK);	
-		GPIO_ResetBits(G595_RCLK);			
+		GPIO_SetBits(G595_RCLK);			
 	}	
 	else if(type == SW4_B)
 	{
@@ -204,15 +197,14 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		//Step 3：RCLK发生一次上升沿，把数据发出去
 		GPIO_ResetBits(H595_RCLK);	
 		delay_us(10);
-		GPIO_SetBits(H595_RCLK);	
-		GPIO_ResetBits(H595_RCLK);			
+		GPIO_SetBits(H595_RCLK);				
 	}	
 	else if(type == PWR_OUT)
 	{
-		for(i=0; i<32; i++)
+		for(i=0; i<8; i++)
 		{	
 			//Step 1: 将数据传送到DAT脚
-			if(i == data - 1)
+			if((data<<i)&0x80)
 				GPIO_SetBits(PWR595_DAT);
 			else
 				GPIO_ResetBits(PWR595_DAT);				
@@ -224,8 +216,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		//Step 3：RCLK发生一次上升沿，把数据发出去
 		GPIO_ResetBits(PWR595_RCLK);	
 		delay_us(10);
-		GPIO_SetBits(PWR595_RCLK);	
-		GPIO_ResetBits(PWR595_RCLK);		
+		GPIO_SetBits(PWR595_RCLK);			
 	}	
 	else if(type == SW_OTHER)
 	{

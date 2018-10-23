@@ -20,6 +20,9 @@
 #define OUTPUT7_OFF		(~OUTPUT7_ON)
 #define OUTPUT8_OFF		(~OUTPUT8_ON)
 
+#define OFF             (0)
+#define ON              (~OFF)
+
 typedef enum
 {
 	NONE_PWR = 0,
@@ -32,6 +35,6 @@ typedef enum
 } SW_PWROUT_TYPE;
 
 void SW_3D3V_Out(SW_PWROUT_TYPE PWRout);
-void PWR24V_CTR(uint8_t output);
+void PWR24V_CTR(uint8_t output, uint8_t state);
 
 #endif

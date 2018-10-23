@@ -1,7 +1,7 @@
 #include "tpswitch.h"
 #include "74HC595.h"
 
-u8 test_point[TEST_POINT_NUMBER] = 
+u8 test_point[86] = 
 {
      1,  2,  3,  4,  5,  6,  7,  8,  9, 10,
     11, 12, 13, 14, 15, 16, 17, 18, 19, 20,

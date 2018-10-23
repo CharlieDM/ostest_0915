@@ -1,5 +1,5 @@
 #include "din.h"
-#include "gpio.h"
+#include "io.h"
 
 uint8_t Din_Status(DATA_IN_STATUS din)
 {

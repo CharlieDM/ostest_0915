@@ -17,10 +17,9 @@ typedef enum
 	TPA = 0,  
 	TPB,
 	ADDITIONAL_TP,
-} TP_TYPE;
+}TP_TYPE;
 
 
-void switch_testpoint(TP_TYPE tp_type , uint16_t point)
+void switch_testpoint(TP_TYPE tp_type , uint16_t point);
 
 #endif
-
