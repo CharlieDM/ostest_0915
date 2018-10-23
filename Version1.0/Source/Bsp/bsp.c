@@ -8,6 +8,6 @@ void bsp_init(void)
     io_init();
     iic_init();
     adc_init();
-    tp_switch_init();
+    hc595_init();
 	lcd12864_init(); 
 }

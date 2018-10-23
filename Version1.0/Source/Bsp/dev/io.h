@@ -1,52 +1,174 @@
-#ifndef __KEY_H
-#define __KEY_H	 
+#ifndef __IO_H
+#define __IO_H	 
 #include "sys.h"
 
-/* Key1 ~ Key4 : PE13-PE15,PB10 */ 
-#define KEY1  GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_13)
-#define KEY2  GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_14)
-#define KEY3  GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_15) 
-#define KEY4  GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_10) 
+#define H595_RCLK_PIN 		GPIO_Pin_0
+#define H595_RCLK_PORT 		GPIOA
+#define H595_SRCLK_PIN 		GPIO_Pin_1
+#define H595_SRCLK_PORT 	GPIOA
+#define H595_DAT_PIN 		GPIO_Pin_2
+#define H595_DAT_PORT 		GPIOA
+#define LCD_BL_PIN			GPIO_Pin_3
+#define LCD_BL_PORT 		GPIOA
+#define AD_EN_PIN 			GPIO_Pin_4
+#define AD_EN_PORT 			GPIOA
+#define LCD_SCK_PIN 		GPIO_Pin_5
+#define LCD_SCK_PORT 		GPIOA
+#define LCD_MOSI_PIN 		GPIO_Pin_6
+#define LCD_MOSI_PORT 		GPIOA
+#define LCD_NSS_PIN			GPIO_Pin_7
+#define LCD_NSS_PORT 		GPIOA
+#define IN7_PIN				GPIO_Pin_8
+#define IN7_PORT 			GPIOA
+#define ISP_TXD_PIN 		GPIO_Pin_9
+#define ISP_TXD_PORT 		GPIOA
+#define ISP_RXD_PIN 		GPIO_Pin_10
+#define ISP_RXD_PORT 		GPIOA
+#define USER_SCL_PIN		GPIO_Pin_11
+#define USER_SCL_PORT 		GPIOA
+#define USER_SDA_PIN		GPIO_Pin_12
+#define USER_SDA_PORT 		GPIOA
+#define RUN_PIN				GPIO_Pin_15
+#define RUN_PIN_PORT 		GPIOA
 
-/* 24IN1 ~ 24IN8: PD13,PD14,PD15,PC6,PC7,PC8,PC9,PA8 */
-#define V24In1  GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_13)
-#define V24In2  GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_14)
-#define V24In3  GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_15) 
-#define V24In4  GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_6)
-#define V24In5  GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_7)
-#define V24In6  GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_8)
-#define V24In7  GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_9) 
-#define V24In8  GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_8)
+#define KEY3_PIN 			GPIO_Pin_0
+#define KEY3_PORT 			GPIOB
+#define KEY4_PIN 			GPIO_Pin_1
+#define KEY4_PORT 			GPIOB
+#define A595_RCLK_PIN 		GPIO_Pin_2
+#define A595_RCLK_PORT 		GPIOB
+#define TM7705_SCK_PIN		GPIO_Pin_3
+#define TM7705_SCK_PORT 	GPIOB
+#define TM7705_MISO_PIN 	GPIO_Pin_4
+#define TM7705_MISO_PORT 	GPIOB
+#define TM7705_MOSI_PIN 	GPIO_Pin_5
+#define TM7705_MOSI_PORT 	GPIOB
+#define TM7705_NSS1_PIN 	GPIO_Pin_6
+#define TM7705_NSS1_PORT 	GPIOB
+#define TM7705_DRDY1_PIN	GPIO_Pin_7
+#define TM7705_DRDY1_PORT 	GPIOB
+#define E595_SRCLK_PIN		GPIO_Pin_8
+#define E595_SRCLK_PORT 	GPIOB
+#define E595_DAT_PIN 		GPIO_Pin_9
+#define E595_DAT_PORT 		GPIOB
+#define PWR595_RCLK_PIN 	GPIO_Pin_10
+#define PWR595_RCLK_PORT 	GPIOB
+#define PWR595_SRCLK_PIN	GPIO_Pin_11
+#define PWR595_SRCLK_PORT 	GPIOB
+#define USER_NSS_PIN		GPIO_Pin_12
+#define USER_NSS_PORT 		GPIOB
+#define USER_SCK_PIN		GPIO_Pin_13
+#define USER_SCK_PORT 		GPIOB
+#define USER_MISO_PIN		GPIO_Pin_14
+#define USER_MISO_PORT 		GPIOB
+#define USER_MOSI_PIN		GPIO_Pin_15
+#define USER_MOSI_PORT 		GPIOB
 
-/* 24EN1 ~ 24EN8: PB1,PB2,PE7,PE8,PE9,PE10,PE11,PE12 */
-#define V24EN1  PBout(1)
-#define V24EN2  PBout(2)
-#define V24EN3  PEout(7)
-#define V24EN4  PEout(8)        /* V24EN4 error always 24v*/
-#define V24EN5  PEout(9)
-#define V24EN6  PEout(10)
-#define V24EN7  PEout(11)
-#define V24EN8  PEout(12)
+#define ADC4_PIN 			GPIO_Pin_0
+#define ADC4_PORT 			GPIOC
+#define ADC3_PIN 			GPIO_Pin_1
+#define ADC3_PORT 			GPIOC
+#define ADC2_PIN 			GPIO_Pin_2
+#define ADC2_PORT 			GPIOC
+#define ADC1_PIN			GPIO_Pin_3
+#define ADC1_PORT 			GPIOC
+#define KEY1_PIN 			GPIO_Pin_4
+#define KEY1_PORT 			GPIOC
+#define KEY2_PIN 			GPIO_Pin_5
+#define KEY2_PORT 			GPIOC
+#define IN3_PIN 			GPIO_Pin_6
+#define IN3_PORT 			GPIOC
+#define IN4_PIN				GPIO_Pin_7
+#define IN4_PORT 			GPIOC
+#define IN5_PIN				GPIO_Pin_8
+#define IN5_PORT 			GPIOC
+#define IN6_PIN 			GPIO_Pin_9
+#define IN6_PORT 			GPIOC
+#define USER_TXD_PIN 		GPIO_Pin_10
+#define USER_TXD_PORT 		GPIOC
+#define USER_RXD_PIN		GPIO_Pin_11
+#define USER_RXD_PORT 		GPIOC
+#define C595_RCLK_PIN		GPIO_Pin_12
+#define C595_RCLK_PORT 		GPIOC
+#define G595_RCLK_PIN		GPIO_Pin_13
+#define G595_RCLK_PORT 		GPIOC
+#define G595_SRCLK_PIN		GPIO_Pin_14
+#define G595_SRCLK_PORT 	GPIOC
+#define G595_DAT_PIN		GPIO_Pin_15
+#define G595_DAT_PORT 		GPIOC
+
+#define C595_SRCLK_PIN 		GPIO_Pin_0
+#define C595_SRCLK_PORT 	GPIOD
+#define C595_DAT_PIN 		GPIO_Pin_1
+#define C595_DAT_PORT 		GPIOD
+#define D595_RCLK_PIN 		GPIO_Pin_2
+#define D595_RCLK_PORT 		GPIOD
+#define D595_SRCLK_PIN		GPIO_Pin_3
+#define D595_SRCLK_PORT 	GPIOD
+#define D595_DAT_PIN 		GPIO_Pin_4
+#define D595_DAT_PORT 		GPIOD
+#define E595_RCLK_PIN 		GPIO_Pin_5
+#define E595_RCLK_PORT 		GPIOD
+#define TM7705_NSS0_PIN 	GPIO_Pin_6
+#define TM7705_NSS0_PORT 	GPIOD
+#define TM7705_DRDY0_PIN	GPIO_Pin_7
+#define TM7705_DRDY0_PORT 	GPIOD
+#define EE_SCL_PIN			GPIO_Pin_8
+#define EE_SCL_PORT			GPIOD
+#define EE_SDA_PIN 			GPIO_Pin_9
+#define EE_SDA_PORT			GPIOD
+#define T595_DAT_PIN 		GPIO_Pin_10
+#define T595_DAT_PORT		GPIOD
+#define T595_RCLK_PIN		GPIO_Pin_11
+#define T595_RCLK_PORT		GPIOD
+#define T595_SRCLK_PIN		GPIO_Pin_12
+#define T595_SRCLK_PORT		GPIOD
+#define IN0_PIN				GPIO_Pin_13
+#define IN0_PORT			GPIOD
+#define IN1_PIN				GPIO_Pin_14
+#define IN1_PORT			GPIOD
+#define IN2_PIN				GPIO_Pin_15
+#define IN2_PORT			GPIOD
+
+#define F595_RCLK_PIN 		GPIO_Pin_0
+#define F595_RCLK_PORT		GPIOE
+#define F595_SRCLK_PIN 		GPIO_Pin_1
+#define F595_SRCLK_PORT		GPIOE
+#define F595_DAT_PIN 		GPIO_Pin_2
+#define F595_DAT_PORT		GPIOE
+#define TEST_EN1_PIN		GPIO_Pin_3
+#define TEST_EN1_PORT		GPIOE
+#define TEST_EN2_PIN 		GPIO_Pin_4
+#define TEST_EN2_PORT		GPIOE
+#define TEST_EN3_PIN 		GPIO_Pin_5
+#define TEST_EN3_PORT		GPIOE
+#define TEST_EN4_PIN 		GPIO_Pin_6
+#define TEST_EN4_PORT		GPIOE
+#define A595_SRCLK_PIN		GPIO_Pin_7
+#define A595_SRCLK_PORT		GPIOE
+#define A595_DAT_PIN		GPIO_Pin_8
+#define A595_DAT_PORT		GPIOE
+#define B595_RCLK_PIN 		GPIO_Pin_9
+#define B595_RCLK_PORT		GPIOE
+#define B595_SRCLK_PIN 		GPIO_Pin_10
+#define B595_SRCLK_PORT		GPIOE
+#define B595_DAT_PIN		GPIO_Pin_11
+#define B595_DAT_PORT		GPIOE
+#define SW_1D8V_PIN			GPIO_Pin_12
+#define SW_1D8V_PORT		GPIOE
+#define SW_3D3V_PIN			GPIO_Pin_13
+#define SW_3D3V_PORT		GPIOE
+#define SW_5V_PIN			GPIO_Pin_14
+#define SW_5V_PORT			GPIOE
+#define PWR595_DAT_PIN		GPIO_Pin_15
+#define PWR595_DAT_PORT		GPIOE
+
 
 /* TEST_EN1 ~ TEST_EN4: PC15,PA0,PA1,PA2 */
 #define TEST_EN1  PCout(15)
 #define TEST_EN2  PAout(0)
 #define TEST_EN3  PAout(1)
 #define TEST_EN4  PAout(2)
-
-#define KEY_START				V24In1
-#define KEY_PLACE1				V24In2
-#define KEY_PLACE2				V24In3
-#define KEY_MENU				V24In4
-
-#define KEY_START_SHORT			0x10
-#define KEY_PLACE1_SHORT		0x20
-#define KEY_MENU_SHORT			0x30
-#define KEY_MENU_LONG			0x31
-
-#define OUTPUT_1				V24EN1
-#define OUTPUT_2				V24EN2
-#define OUTPUT_3				V24EN2
 
 void io_init(void);	 
 	 

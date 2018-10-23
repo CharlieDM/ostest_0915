@@ -1,10 +1,7 @@
 
-#include "res.h"
+#include "bsp.h"
 #include "ostest.h"
 #include "data.h"
-#include "delay.h"
-#include "io.h"
-#include "tpswitch.h"
 #include "string.h"
 #include "show.h"
 
@@ -36,10 +33,10 @@ u8 array_judge(u16 temp,u8 arraytemp[],u8 chainlength)
 
 u8 wait_start_sign(void)
 {
-    if(KEY_START)
+    if(Din_Status(KEY_START))
     {
         delay_ms(10);
-        if(KEY_START)
+        if(Din_Status(KEY_START))
         {
             return KEY_START_SHORT;
         }
@@ -178,18 +175,18 @@ void start_test(void)
     show_test();
     
     /* move */
-    OUTPUT_1 = 1;
-    OUTPUT_2 = 1;
+    PWR24V_CTR(CYLINDER_1_ON);
+    PWR24V_CTR(CYLINDER_2_ON);
     while(1)
     {
-        if(KEY_PLACE1) break;
-        if(KEY_PLACE2) { show_init(); OUTPUT_1 = 0; OUTPUT_2 = 0; return; }
-        if(num++ > 2000) { OUTPUT_1 = 0; break; } 
+        if(Din_Status(KEY_PLACE1)) break;
+        if(Din_Status(KEY_PLACE2)) { show_init(); PWR24V_CTR(CYLINDER_1_OFF); PWR24V_CTR(CYLINDER_2_OFF); return; }
+        if(num++ > 2000) { break; } 
         delay_ms(1);
     }    
     
     /* hold inhale */
-    OUTPUT_3 = 1;
+    PWR24V_CTR(CYLINDER_3_ON);
     test_all_result = 0;
     test_times = 0;
     
@@ -200,11 +197,11 @@ void start_test(void)
     os_test();
       
     /* release inhale */
-    OUTPUT_3 = 0;
+    PWR24V_CTR(CYLINDER_3_OFF);
     delay_ms(100);
-    OUTPUT_2 = 0;
+    PWR24V_CTR(CYLINDER_2_OFF);
     delay_ms(100);
-    OUTPUT_1 = 0;
+    PWR24V_CTR(CYLINDER_1_OFF);
     
     /* show the result */
     for(i=0; i<test_times; i++)

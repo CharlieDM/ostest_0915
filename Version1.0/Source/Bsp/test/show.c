@@ -7,16 +7,24 @@
 #include "tpswitch.h"
 #include "ostest.h"
 #include "lcd12864.h"
+#include "din.h"
+
+#define WELCOME_STR         (u8*)"准备测试"
+#define TEST_STR            (u8*)"测试中.."
+#define FIND_STR            (u8*)"找点："
+#define TP1_STR     		(u8*)"TP1:"
+#define TP2_STR     		(u8*)"TP2:"
+#define DATA_STR    		(u8*)"Data:"
 
 static u8 page = 0;
 
 u8 show_key_scan(void)
 {
 	u16 pressedtimes = 0;
-	if(KEY_MENU == 1)
+	if(Din_Status(KEY_MENU) == 1)
 	{
 		delay_ms(10);
-		while(KEY_MENU == 1)
+		while(Din_Status(KEY_MENU) == 1)
 		{
 			pressedtimes++;
 			delay_ms(1);
@@ -27,9 +35,6 @@ u8 show_key_scan(void)
 	return 0;
 }
 
-#define TP1_STR     (u8*)"TP1:"
-#define TP2_STR     (u8*)"TP2:"
-#define DATA_STR    (u8*)"Data:"
 void show_page(u8 page)
 {
     u8 temp[6] = {0};
@@ -75,7 +80,6 @@ void show_result(void)
 	page = 0;
 }
 
-#define FIND_STR            (u8*)"找点："
 void show_find_point(void)
 {
 	u8 key=0;
@@ -136,8 +140,7 @@ void show_main(void)
 	}	
 }
 
-#define WELCOME_STR         (u8*)"准备测试"
-#define TEST_STR            (u8*)"测试中.."
+
 void show_init(void)
 {
     lcd12864_clear_line(1);
