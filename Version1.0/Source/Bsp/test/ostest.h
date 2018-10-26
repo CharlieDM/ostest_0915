@@ -11,6 +11,8 @@
 #define THRESHOLD_OPEN              (10)
 #define THRESHOLD_PANEL             (5)
 
+
+
 typedef struct _oschain_t
 {
     u8 len;

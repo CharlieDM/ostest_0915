@@ -52,7 +52,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		for(i=0; i<32; i++)
 		{	
 			//Step 1: 将数据传送到DAT脚
-			if(i == data - 1)
+			if((data<<i)&0x80)
 				GPIO_SetBits(A595_DAT);
 			else
 				GPIO_ResetBits(A595_DAT);				
@@ -71,7 +71,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		for(i=0; i<32; i++)
 		{	
 			//Step 1: 将数据传送到DAT脚
-			if(i == data - 1)
+			if((data<<i)&0x80)
 				GPIO_SetBits(B595_DAT);
 			else
 				GPIO_ResetBits(B595_DAT);				
@@ -90,7 +90,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		for(i=0; i<32; i++)
 		{	
 			//Step 1: 将数据传送到DAT脚
-			if(i == data - 1)
+			if((data<<i)&0x80)
 				GPIO_SetBits(C595_DAT);
 			else
 				GPIO_ResetBits(C595_DAT);				
@@ -109,7 +109,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		for(i=0; i<32; i++)
 		{	
 			//Step 1: 将数据传送到DAT脚
-			if(i == data - 1)
+			if((data<<i)&0x80)
 				GPIO_SetBits(D595_DAT);
 			else
 				GPIO_ResetBits(D595_DAT);				
@@ -128,7 +128,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		for(i=0; i<32; i++)
 		{	
 			//Step 1: 将数据传送到DAT脚
-			if(i == data - 1)
+			if((data<<i)&0x80)
 				GPIO_SetBits(E595_DAT);
 			else
 				GPIO_ResetBits(E595_DAT);				
@@ -147,7 +147,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		for(i=0; i<32; i++)
 		{	
 			//Step 1: 将数据传送到DAT脚
-			if(i == data - 1)
+			if((data<<i)&0x80)
 				GPIO_SetBits(F595_DAT);
 			else
 				GPIO_ResetBits(F595_DAT);				
@@ -166,7 +166,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		for(i=0; i<32; i++)
 		{	
 			//Step 1: 将数据传送到DAT脚
-			if(i == data - 1)
+			if((data<<i)&0x80)
 				GPIO_SetBits(G595_DAT);
 			else
 				GPIO_ResetBits(G595_DAT);				
@@ -185,7 +185,7 @@ void HC595SendData(HC595_TYPE type, uint16_t data)
 		for(i=0; i<32; i++)
 		{	
 			//Step 1: 将数据传送到DAT脚
-			if(i == data - 1)
+			if((data<<i)&0x80)
 				GPIO_SetBits(H595_DAT);
 			else
 				GPIO_ResetBits(H595_DAT);				

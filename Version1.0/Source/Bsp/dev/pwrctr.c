@@ -6,11 +6,10 @@
 #define SW_3D3V			SW_3D3V_PORT, SW_3D3V_PIN
 #define SW_5V			SW_5V_PORT, SW_5V_PIN 
 
-uint8_t PWR_OUT_Status = 0;
-
+static uint8_t PWR_OUT_Status = 0;
 void PWR24V_CTR(uint8_t output, uint8_t state)
 {
-    if(state)
+    if(state == ON)
         PWR_OUT_Status |= output;
     else
         PWR_OUT_Status &= output;
