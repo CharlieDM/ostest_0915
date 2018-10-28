@@ -1,11 +1,14 @@
 
+#include "io.h"
 #include "delay.h"
 #include "lcd12864.h"
 
-#define LCD_CS          GPIOA, GPIO_Pin_7 
-#define LCD_DATA        GPIOA, GPIO_Pin_6 
-#define LCD_CLK         GPIOA, GPIO_Pin_5
-#define LCD_RST         GPIOA, GPIO_Pin_4
+#define LCD_PORTS       GPIO_Pin_3 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7
+
+#define LCD_CS          LCD_NSS_PORT,LCD_NSS_PIN 
+#define LCD_DATA        LCD_MOSI_PORT,LCD_MOSI_PIN 
+#define LCD_CLK         LCD_SCK_PORT,LCD_SCK_PIN
+#define LCD_BL          LCD_BL_PORT,LCD_BL_PIN
 
 const u8 TABLE[]=
 {   
@@ -59,26 +62,22 @@ void lcd12864_wdata(u8 data)
 void lcd12864_io_config(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
-	RCC_APB2PeriphClockCmd(	RCC_APB2Periph_GPIOA, ENABLE );
+	RCC_APB2PeriphClockCmd(	RCC_APB2Periph_GPIOB, ENABLE );
 
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7; 
+	GPIO_InitStructure.GPIO_Pin = LCD_PORTS; 
  	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;  
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
  	GPIO_Init(GPIOA, &GPIO_InitStructure);
- 	GPIO_SetBits(GPIOA,GPIO_Pin_3 | GPIO_Pin_4);
-    GPIO_ResetBits(GPIOB,GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7);
+
+    GPIO_ResetBits(GPIOB,LCD_PORTS);
+    GPIO_SetBits(LCD_BL);
 }
 
 void lcd12864_init(void)
 {    
+    delay_ms(100);
     lcd12864_io_config();
 
-    delay_ms(5);   
-    GPIO_ResetBits(LCD_RST); 
-    delay_ms(100);
-    GPIO_SetBits(LCD_RST);         
-    delay_ms(5);
-    
     lcd12864_wcmd(0x30);
     lcd12864_wcmd(0x0C);
     lcd12864_wcmd(0x01);
@@ -143,5 +142,8 @@ u8 number_to_str(u8 *str, u32 num)
         *(str++) = temp_mod + 0x30;
         len++;
     }while(num);
+        
     return len;
 }
+
+

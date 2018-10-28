@@ -79,10 +79,10 @@ void show_result(void)
 void show_find_point(void)
 {
 	u8 key=0;
-    u8 i=0,num=0,len=0,pos=0;
+    u8 i=0,j=0,num=0,len=0,pos=0;
 	u8 point[86] = {0};    
     u8 temp[3] = {0};
-    u8 temp_str[100] = {0};
+    u8 temp_str[48] = {0x20};
     
     lcd12864_clear();
     lcd12864_display_char(0,0,FIND_STR); 
@@ -93,18 +93,24 @@ void show_find_point(void)
 		num = find_point(point);
 		if(point[0])
 		{
+            /* clear show */
 			/* show number */
 			for(i=0;i<num;i++)
             {
                 len = number_to_str(temp,point[i]);
-                memcpy(temp_str+pos,temp,len);
-                temp_str[pos] = 0x20;
-                pos += len+1;
+                for(j=0; j<len; j++)
+                {
+                    pos += j;
+                    temp_str[pos] = temp[len-j-1];
+                }
+                temp_str[++pos] = 0x20;
+                ++pos;
                 memset(temp,0,3);
             }  
             lcd12864_display_char(1,0,temp_str); 
+            pos = 0;
             /* clear */
-            memset(temp_str,0,100);			
+            memset(temp_str,0x20,48);			
 			memset(point,0,86);
 		}
 		/* check key */

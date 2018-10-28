@@ -9,9 +9,9 @@ void adc_init(void)
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC |RCC_APB2Periph_ADC1, ENABLE );	 
 	RCC_ADCCLKConfig(RCC_PCLK2_Div6);  	 
                       
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;						
-	GPIO_Init(GPIOA, &GPIO_InitStructure);	
+	GPIO_Init(GPIOC, &GPIO_InitStructure);	
 
 	ADC_DeInit(ADC1);  													//复位ADC1,将外设 ADC1 的全部寄存器重设为缺省值 
 	ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;					//ADC工作模式:ADC1和ADC2工作在独立模式

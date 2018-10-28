@@ -1,6 +1,9 @@
 
 #include "bsp.h"
 
+
+u16 data1 = 0;
+u16 data2 = 0;
 void bsp_init(void) 
 { 
  	delay_init();
@@ -8,12 +11,27 @@ void bsp_init(void)
     io_init();
     iic_init();
     adc_init();
-    hc595_init();
-	lcd12864_init(); 
-    
-    PWR24V_CTR(CYLINDER_1_ON, ON);
-    PWR24V_CTR(CYLINDER_2_ON, ON);
-    PWR24V_CTR(CYLINDER_3_ON, ON);
-    PWR24V_CTR(LED_ON, ON);
+    hc595_init();    
+    spi3_init();
+    tm7705_io_config();
+    tm7705_init(CHIP0);
+    TIM_Int_Init();
+    uart_init(115200);
+    lcd12864_init();     
     PWR24V_CTR(OUTPUT_OFF, OFF);
+    fct_swtich(FCT_OFF);  
+    
+//    fct_swtich(FCT_4W_EN5);
+//    
+//    switch_testpoint(TPA,1);
+//    switch_testpoint(TPB,5);
+//    
+//    while(1)
+//    {
+
+//        data1 = tm7705_read_data(CHIP0,CHANNEL0);
+//        delay_ms(100);
+//        data2 = tm7705_read_data(CHIP0,CHANNEL1);
+//        delay_ms(100);
+//    }
 }

@@ -4,7 +4,7 @@
 
 #define PIN_OFF			1
 #define PIN_ON			0
-#define PIN_ALL_OFF		33
+#define PIN_ALL_OFF		0
 
 typedef enum
 {

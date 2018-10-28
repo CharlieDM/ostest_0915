@@ -1,6 +1,5 @@
 #include "spi.h"
-
-#define SPI3_PORTS	TM7705_MISO_PIN|TM7705_MISO_PIN|TM7705_MOSI_PIN
+#include "io.h"
 
 //SPI_BaudRatePrescaler_2   2·ÖÆµ   (SPI 36M@sys 72M)
 //SPI_BaudRatePrescaler_8   8·ÖÆµ   (SPI 9M@sys 72M)
@@ -8,18 +7,10 @@
 //SPI_BaudRatePrescaler_256 256·ÖÆµ (SPI 281.25K@sys 72M)
 void spi3_init(void)
 {
-	GPIO_InitTypeDef GPIO_InitStructure;
 	SPI_InitTypeDef  SPI_InitStructure;
   
-	RCC_APB2PeriphClockCmd(	RCC_APB2Periph_GPIOB|RCC_APB1Periph_SPI3, ENABLE );	
+    RCC_APB1PeriphClockCmd(	RCC_APB1Periph_SPI3, ENABLE );	
  
-	GPIO_InitStructure.GPIO_Pin = SPI3_PORTS;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;  
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-
- 	GPIO_SetBits(GPIOB, SPI3_PORTS);
-
 	SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;  
 	SPI_InitStructure.SPI_Mode = SPI_Mode_Master;		
 	SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;		
@@ -34,9 +25,17 @@ void spi3_init(void)
 	SPI_Cmd(SPI3, ENABLE); 	
 }   
 
-u8 spi3_read_byte(void)
+u8 spi3_readwrite_byte(u8 data)
 {		
 	u8 retry=0;	
+    while (SPI_I2S_GetFlagStatus(SPI3, SPI_I2S_FLAG_TXE) == RESET) 
+	{
+		retry++;
+		if(retry>200)return 0;
+	}			  
+	SPI_I2S_SendData(SPI3, data); 
+    
+    retry=0;
 	while (SPI_I2S_GetFlagStatus(SPI3, SPI_I2S_FLAG_RXNE) == RESET)
 	{
 		retry++;
@@ -45,14 +44,4 @@ u8 spi3_read_byte(void)
 	return SPI_I2S_ReceiveData(SPI3); 			    
 }
 
-void spi3_write_byte(u8 data)
-{
-	u8 retry=0;				 	
-	while (SPI_I2S_GetFlagStatus(SPI3, SPI_I2S_FLAG_TXE) == RESET) 
-	{
-		retry++;
-		if(retry>200)return 0;
-	}			  
-	SPI_I2S_SendData(SPI3, data); 
-}
 

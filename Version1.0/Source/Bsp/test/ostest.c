@@ -4,6 +4,7 @@
 #include "data.h"
 #include "string.h"
 #include "show.h"
+#include "fct.h"
 
 /* 40 point */
 OsChain_t openchain[OPENCHAIN_LEN] = {0};
@@ -151,19 +152,20 @@ void os_test(void)
 u8 find_point(u8 *data)
 {
 	u8 tp1=0,num=0;
-//	u32 adcx=0;
-//    TEST_EN1 = 1;
-//	for(tp1=0; tp1<TEST_POINT_NUMBER; tp1++)
-//    {
-//        tp1_switch(tp1+1);
-//		adcx = res_value();
-//		if(adcx < 1000)
-//		{
-//			*(data++) = tp1;
-//            num++;
-//		}
-//	}
-//    TEST_EN1 = 0;
+	u32 adcx=0;
+    fct_swtich(FCT_100R_EN3);     
+	for(tp1=1; tp1<97; tp1++)
+    {
+        switch_testpoint(TPA,tp1);
+		adcx = fct_get_data(FCT_ADC3_IN);
+		if(adcx < 500)
+		{
+			*(data++) = tp1;
+            num++;
+		}
+        delay_us(100);
+	}
+    fct_swtich(FCT_OFF); 
     return num;
 }
 

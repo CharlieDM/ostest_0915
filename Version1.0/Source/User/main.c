@@ -1,4 +1,4 @@
-l#include "bsp.h"
+#include "bsp.h"
 #include "data.h"
 #include "ostest.h"
 
@@ -11,7 +11,7 @@ int main(void)
     
     /* show */
     show_init();
-    
+
     while(1)
     {
         switch(state)
@@ -32,7 +32,7 @@ int main(void)
                 start_test();
             
                 /* goto wait start */
-                state = ON_TEST;
+                state = WAIT_START;
                 break;
             
             default: break;

@@ -20,8 +20,14 @@
 #define OUTPUT7_OFF		(~OUTPUT7_ON)
 #define OUTPUT8_OFF		(~OUTPUT8_ON)
 
+#define ISOLATE_OFF     0xFF
+#define ISOLATE_1       0xFC
+#define ISOLATE_2       0xF3
+#define ISOLATE_3       0xCF
+#define ISOLATE_4       0x3F
+
 #define OFF             (0)
-#define ON              (~OFF)
+#define ON              (1)
 
 typedef enum
 {
@@ -34,7 +40,18 @@ typedef enum
 	PWR_5V_OFF,			//¿É¿Ø5VÊä³ö¹Ø±Õ
 } SW_PWROUT_TYPE;
 
+typedef enum
+{
+    FCT_OFF = 0,
+    FCT_100R_EN1,
+    FCT_1M_EN2,
+    FCT_100R_EN3,
+    FCT_100R_EN4,
+    FCT_4W_EN5,
+}FCT_EN_TYPE;
+
 void SW_3D3V_Out(SW_PWROUT_TYPE PWRout);
 void PWR24V_CTR(uint8_t output, uint8_t state);
+void fct_swtich(FCT_EN_TYPE ftype);
 
 #endif

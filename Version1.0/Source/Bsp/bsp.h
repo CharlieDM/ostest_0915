@@ -12,9 +12,13 @@
 #include "74HC595.h"
 #include "din.h"
 #include "pwrctr.h"
+#include "tm7705.h"
+#include "spi.h"
+#include "tim.h"
+#include "usart.h"
 
-#define KEY_MENU				DIN1
-#define KEY_START				DIN2
+#define KEY_START				DIN1
+#define KEY_MENU				DIN2
 #define KEY_PLACE1				DIN3
 #define KEY_PLACE2				DIN4
 
@@ -23,14 +27,21 @@
 #define KEY_MENU_SHORT			0x30
 #define KEY_MENU_LONG			0x31
 
-#define CYLINDER_1_ON			OUTPUT1_ON
-#define CYLINDER_1_OFF			OUTPUT1_OFF
-#define CYLINDER_2_ON			OUTPUT2_ON
-#define CYLINDER_2_OFF			OUTPUT2_OFF
-#define CYLINDER_3_ON			OUTPUT3_ON
-#define CYLINDER_3_OFF			OUTPUT3_OFF
-#define LED_ON					OUTPUT4_ON
-#define LED_OFF					OUTPUT4_OFF
+#define LED_PASS_ON				OUTPUT8_ON
+#define LED_PASS_OFF			OUTPUT8_OFF
+#define LED_FAIL_ON				OUTPUT7_ON
+#define LED_FAIL_OFF			OUTPUT7_OFF
+#define CYLINDER_1_ON			OUTPUT6_ON
+#define CYLINDER_1_OFF			OUTPUT6_OFF
+#define CYLINDER_2_ON			OUTPUT5_ON
+#define CYLINDER_2_OFF			OUTPUT5_OFF
+#define CYLINDER_3_ON			OUTPUT4_ON
+#define CYLINDER_3_OFF			OUTPUT4_OFF
+
+/*
+    input：启动，翻页，大气缸上，大气缸下，光栅 1,2,3,4,5
+    output: 绿灯，红灯，大气缸，小气缸，真空吸  8,7,6,5,4
+*/
 
 void bsp_init(void);
 	 

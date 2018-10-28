@@ -479,6 +479,11 @@
               <FileType>1</FileType>
               <FilePath>..\Source\User\stm32f10x_it.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f10x_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Source\User\stm32f10x_conf.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -508,6 +513,21 @@
               <FileName>adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Source\Bsp\interface\adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Source\Bsp\interface\spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>queue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Source\Bsp\interface\queue.c</FilePath>
+            </File>
+            <File>
+              <FileName>tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Source\Bsp\interface\tim.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -539,6 +559,26 @@
               <FileType>1</FileType>
               <FilePath>..\Source\Bsp\dev\lcd12864.c</FilePath>
             </File>
+            <File>
+              <FileName>74HC595.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Source\Bsp\dev\74HC595.c</FilePath>
+            </File>
+            <File>
+              <FileName>din.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Source\Bsp\dev\din.c</FilePath>
+            </File>
+            <File>
+              <FileName>pwrctr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Source\Bsp\dev\pwrctr.c</FilePath>
+            </File>
+            <File>
+              <FileName>tm7705.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Source\Bsp\dev\tm7705.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -558,6 +598,11 @@
               <FileName>show.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Source\Bsp\test\show.c</FilePath>
+            </File>
+            <File>
+              <FileName>fct.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Source\Bsp\test\fct.c</FilePath>
             </File>
           </Files>
         </Group>
