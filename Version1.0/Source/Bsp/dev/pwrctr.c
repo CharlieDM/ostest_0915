@@ -1,3 +1,4 @@
+
 #include "pwrctr.h"
 #include "74HC595.h"
 #include "io.h"
@@ -23,11 +24,6 @@ void PWR24V_CTR(uint8_t output, uint8_t state)
 	HC595SendData(PWR_OUT, PWR_OUT_Status);
 }
 
-void isolate_switch(uint8_t point)
-{
-    HC595SendData(SW_OTHER, point);
-}
-
 void SW_3D3V_Out(SW_PWROUT_TYPE PWRout)
 {
 	if(PWRout == PWR_1D8V_ON)		GPIO_SetBits(SW_1D8V);		
@@ -42,6 +38,11 @@ void SW_3D3V_Out(SW_PWROUT_TYPE PWRout)
 		GPIO_ResetBits(SW_3D3V);
 		GPIO_ResetBits(SW_5V);		
 	}
+}
+
+void isolate_switch(uint8_t point)
+{
+    HC595SendData(SW_OTHER, point);
 }
 
 void fct_swtich(FCT_EN_TYPE ftype)

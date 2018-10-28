@@ -53,5 +53,6 @@ typedef enum
 void SW_3D3V_Out(SW_PWROUT_TYPE PWRout);
 void PWR24V_CTR(uint8_t output, uint8_t state);
 void fct_swtich(FCT_EN_TYPE ftype);
+void isolate_switch(uint8_t point);
 
 #endif

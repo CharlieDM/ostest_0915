@@ -5,8 +5,10 @@
 #define PASS_STR        (u8*)"Pass"
 #define FAIL_STR        (u8*)"Fail"
 
-#define	OS_COMPENSATE_NUMBER		(30)
 #define TEST_POINT_NUMBER			(86)
+
+#define PASS			(0)
+#define FAIL			(1)
 
 typedef enum 
 {
@@ -14,14 +16,22 @@ typedef enum
     ON_TEST,
 }eSysState;
 
-typedef struct  _test_result_t
+typedef struct  _item_result_t
 {
 	u16 no;
 	u8 result;
 	u8 tp1;
 	u8 tp2;
 	u16 data;
-}Testresult_t;
+}Item_result_t;
+
+typedef struct _test_result_t
+{
+	u16 times;
+	u8 all_result;
+	u8 complete_flag;
+	
+}Test_result_t;
 
 typedef struct  _compensate_t
 {
@@ -31,10 +41,8 @@ typedef struct  _compensate_t
 }Compensate_t;
 
 extern u8 test_point[TEST_POINT_NUMBER];
-extern Testresult_t result[1000];
-extern u16 test_times;
-extern u8 test_all_result;
-extern Compensate_t oscompensate[OS_COMPENSATE_NUMBER];
-extern Compensate_t panelcompensate[2];
+extern Item_result_t item_result[1000];
+extern Test_result_t test_result;
 
 #endif
+

@@ -3,11 +3,14 @@
 
 #include "sys.h"
 
-#define SHORTCHAIN_LEN              (5)
-#define OPENCHAIN_LEN               (40)
-#define PANELCHAIN_LEN              (2)
+#define PANEL_2_LEN              	(2)
+#define CHAIN_40_LEN               	(40)
+#define CONNECT_10_LEN              (10)
+#define CONNECT_30_LEN              (30)
+#define PAD_40_LEN               	(40)
+
 #define TOTAL_POINT                 (86)
-#define THRESHOLD_SHORT             (1000000)
+#define THRESHOLD_SHORT             (1000)
 #define THRESHOLD_OPEN              (10)
 #define THRESHOLD_PANEL             (5)
 

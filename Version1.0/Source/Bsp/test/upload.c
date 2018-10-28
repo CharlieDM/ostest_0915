@@ -12,20 +12,20 @@ u8 uart_tx_buf[255] ={0};
 
 void send_result(void)
 {
-    u8 i=0;
-    /* head */
-    uart_tx_buf[0] = HEAD_STR;
-    uart_tx_buf[1] = 0x55;
-  
-    /* send total result */
-    if(test_all_result)
-    {
-        memcpy(&uart_tx_buf[2],FAIL_STR,4);
-    }
-    else
-    {
-        memcpy(&uart_tx_buf[2],PASS_STR,4);
-    }
+//    u8 i=0;
+//    /* head */
+//    uart_tx_buf[0] = HEAD_STR;
+//    uart_tx_buf[1] = 0x55;
+//  
+//    /* send total result */
+//    if(test_all_result)
+//    {
+//        memcpy(&uart_tx_buf[2],FAIL_STR,4);
+//    }
+//    else
+//    {
+//        memcpy(&uart_tx_buf[2],PASS_STR,4);
+//    }
     
 //    /* send panel result */
 //    for(i=0; i<2; i++)
@@ -48,11 +48,11 @@ void send_result(void)
 //            memcpy(&uart_tx_buf[28+6*i],(u8*)&oserror[i].tp2,2);
 //            memcpy(&uart_tx_buf[30+6*i],(u8*)&oserror[i].data,2);
 //        }
-//    }
-    
-    /* send end */
-    uart_tx_buf[i] = 0xAA;
-    uart_tx_buf[i+1] = 0x55;
+////    }
+//    
+//    /* send end */
+//    uart_tx_buf[i] = 0xAA;
+//    uart_tx_buf[i+1] = 0x55;
 }
 
 #define EEPROM_FLAG_ADDR		(4095)

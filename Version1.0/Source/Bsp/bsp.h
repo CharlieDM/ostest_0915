@@ -16,6 +16,7 @@
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
+#include "fct.h"
 
 #define KEY_START				DIN1
 #define KEY_MENU				DIN2

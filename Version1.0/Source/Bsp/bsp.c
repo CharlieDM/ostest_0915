@@ -1,7 +1,6 @@
 
 #include "bsp.h"
 
-
 u16 data1 = 0;
 u16 data2 = 0;
 void bsp_init(void) 
@@ -19,7 +18,8 @@ void bsp_init(void)
     uart_init(115200);
     lcd12864_init();     
     PWR24V_CTR(OUTPUT_OFF, OFF);
-    fct_swtich(FCT_OFF);  
+    fct_swtich(FCT_OFF); 
+    isolate_switch(ISOLATE_OFF); 
     
 //    fct_swtich(FCT_4W_EN5);
 //    

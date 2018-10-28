@@ -63,7 +63,7 @@ void show_error(u16 type)
 
 void show_result(void)
 {
-    if(test_all_result == 0xFF)
+    if(test_result.all_result == PASS)
     {
         /* pass */
         show_pass();
@@ -127,10 +127,10 @@ void show_main(void)
 	switch(key)
 	{
 		case KEY_MENU_SHORT:
-			if(test_all_result)
+			if(test_result.complete_flag)
 			{
 				show_page(page);
-				if(page++ > test_times) page = 0;
+				if(page++ > test_result.times) page = 0;
 			}
 			break;
 

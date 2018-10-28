@@ -48,7 +48,7 @@
 //HC595Êý¾Ý·¢ËÍ
 void HC595SendData(HC595_TYPE type, uint16_t data)
 {
-	uint8_t i, num;
+	uint8_t i;
 	if(type == SW1_A)
 	{
         data = 32 - data;
