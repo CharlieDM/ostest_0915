@@ -33,27 +33,31 @@ u8 show_key_scan(void)
 
 void show_page(u8 page)
 {
-    u8 temp[6] = {0};
+    u8 temp[10] = {0};
+	u8 len=0,temp_str[10] = {0};
     lcd12864_clear_line(0);
     lcd12864_clear_line(1);
 	lcd12864_clear_line(2);
     
     /* tp1 */
     lcd12864_display_char(0,0,TP1_STR);  
-    number_to_str(temp,10);
-    lcd12864_display_char(0,3,temp); 
+    len = number_to_str(temp,item_result[page].tp1);
+	str_reverse(temp,temp_str,len);
+    lcd12864_display_char(0,3,temp_str); 
     memset(temp,0,6);
     
     /* tp2 */
     lcd12864_display_char(1,0,TP2_STR);
-    number_to_str(temp,33);
-    lcd12864_display_char(1,3,temp); 
+    len = number_to_str(temp,temp,item_result[page].tp2);
+	str_reverse(temp,temp_str,len);
+    lcd12864_display_char(1,3,temp_str); 
     memset(temp,0,6);
     
     /* data */
     lcd12864_display_char(2,0,DATA_STR);
-    number_to_str(temp,545);
-    lcd12864_display_char(2,3,temp); 
+    len = number_to_str(temp,temp,item_result[page].data);
+	str_reverse(temp,temp_str,len);
+    lcd12864_display_char(2,3,temp_str); 
 }
 
 void show_error(u16 type)
@@ -67,11 +71,15 @@ void show_result(void)
     {
         /* pass */
         show_pass();
+		PWR24V_CTR(LED_FAIL_OFF, OFF);
+		PWR24V_CTR(LED_PASS_ON, ON);
     }
     else
     {
         /* fail */
         show_fail();
+		PWR24V_CTR(LED_PASS_OFF, OFF);
+		PWR24V_CTR(LED_FAIL_ON, ON);
     }	
 	page = 0;
 }
@@ -130,7 +138,7 @@ void show_main(void)
 			if(test_result.complete_flag)
 			{
 				show_page(page);
-				if(page++ > test_result.times) page = 0;
+				if(++page > test_result.times) page = 0;
 			}
 			break;
 
@@ -153,6 +161,8 @@ void show_test(void)
 {
     lcd12864_clear_line(1);
     lcd12864_display_char(1,2,TEST_STR);
+	PWR24V_CTR(LED_PASS_OFF, OFF);
+	PWR24V_CTR(LED_FAIL_OFF, OFF);
 }
 
 void show_pass(void)

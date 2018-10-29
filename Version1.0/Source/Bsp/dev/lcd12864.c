@@ -146,4 +146,12 @@ u8 number_to_str(u8 *str, u32 num)
     return len;
 }
 
+void str_reverse(u8 *src, u8 *tar, u8 len)
+{
+	u8 i=0;
+	for(i=0; i<len; i++)
+	{
+		*(tar+i) = *(src+len-i-1);
+	}
+}
 

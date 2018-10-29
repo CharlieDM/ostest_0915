@@ -9,5 +9,6 @@ void lcd12864_clear(void);
 void lcd12864_clear_line(u8 line);
 
 u8 number_to_str(u8 *str, u32 num);
+void str_reverse(u8 *src, u8 *tar, u8 len);
 
 #endif 

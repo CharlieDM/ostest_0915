@@ -47,7 +47,7 @@ void uart_init(u32 bound){
 	USART_Cmd(UART4, ENABLE);                   
 }
 
-void USART2_IRQHandler(void)             
+void UART4_IRQHandler(void)             
 {
 	if(USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
 	{
@@ -57,7 +57,7 @@ void USART2_IRQHandler(void)
 	}	
 } 
 
-void USART_WriteBytes(USART_TypeDef* USARTx, uint8_t *data, uint16_t length)
+void uart_puts(USART_TypeDef* USARTx, uint8_t *data, uint16_t length)
 {	
 	while(length--)
 	{
