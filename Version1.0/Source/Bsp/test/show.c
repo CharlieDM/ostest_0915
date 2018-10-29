@@ -48,14 +48,14 @@ void show_page(u8 page)
     
     /* tp2 */
     lcd12864_display_char(1,0,TP2_STR);
-    len = number_to_str(temp,temp,item_result[page].tp2);
+    len = number_to_str(temp,item_result[page].tp2);
 	str_reverse(temp,temp_str,len);
     lcd12864_display_char(1,3,temp_str); 
     memset(temp,0,6);
     
     /* data */
     lcd12864_display_char(2,0,DATA_STR);
-    len = number_to_str(temp,temp,item_result[page].data);
+    len = number_to_str(temp,item_result[page].data);
 	str_reverse(temp,temp_str,len);
     lcd12864_display_char(2,3,temp_str); 
 }

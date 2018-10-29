@@ -14,7 +14,7 @@
 #define AT24C256	32767  
 
 
-#define EE_TYPE AT24C32
+#define EE_TYPE AT24C04
 					  
 u8 AT24CXX_ReadOneByte(u16 ReadAddr);							//指定地址读取一个字节
 void AT24CXX_WriteOneByte(u16 WriteAddr,u8 DataToWrite);		//指定地址写入一个字节

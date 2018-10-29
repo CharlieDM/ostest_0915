@@ -11,14 +11,14 @@
 #define OUTPUT6_ON		0x20
 #define OUTPUT7_ON		0x40
 #define OUTPUT8_ON		0x80
-#define OUTPUT1_OFF		(~OUTPUT1_ON)
-#define OUTPUT2_OFF		(~OUTPUT2_ON)
-#define OUTPUT3_OFF		(~OUTPUT3_ON)
-#define OUTPUT4_OFF		(~OUTPUT4_ON)
-#define OUTPUT5_OFF		(~OUTPUT5_ON)
-#define OUTPUT6_OFF		(~OUTPUT6_ON)
-#define OUTPUT7_OFF		(~OUTPUT7_ON)
-#define OUTPUT8_OFF		(~OUTPUT8_ON)
+#define OUTPUT1_OFF		(u8)(~OUTPUT1_ON)
+#define OUTPUT2_OFF		(u8)(~OUTPUT2_ON)
+#define OUTPUT3_OFF		(u8)(~OUTPUT3_ON)
+#define OUTPUT4_OFF		(u8)(~OUTPUT4_ON)
+#define OUTPUT5_OFF		(u8)(~OUTPUT5_ON)
+#define OUTPUT6_OFF		(u8)(~OUTPUT6_ON)
+#define OUTPUT7_OFF		(u8)(~OUTPUT7_ON)
+#define OUTPUT8_OFF		(u8)(~OUTPUT8_ON)
 
 #define ISOLATE_OFF     0xFF
 #define ISOLATE_1       0xFC

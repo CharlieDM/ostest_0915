@@ -131,7 +131,7 @@ void lcd12864_display_char(u8 row, u8 col,u8 *data)
     }   
 }
 
-u8 number_to_str(u8 *str, u32 num)
+u8 number_to_str(u8 *str, u16 num)
 {
     u8 len=0;
     u32 temp_mod=0;

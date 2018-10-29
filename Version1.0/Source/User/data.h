@@ -6,6 +6,7 @@
 #define FAIL_STR        (u8*)"Fail"
 
 #define TEST_POINT_NUMBER			(86)
+#define COMPENSATE_NUM              (42)
 
 #define PASS			(0)
 #define FAIL			(1)
@@ -35,14 +36,13 @@ typedef struct _test_result_t
 
 typedef struct  _compensate_t
 {
-	u16 no;
-    u8 dir;
-	u16 offset;
+	u8 open_offset[COMPENSATE_NUM];
+    u16 short_offset;
 }Compensate_t;
 
-extern u8 test_point[TEST_POINT_NUMBER];
 extern Item_result_t item_result[1000];
 extern Test_result_t test_result;
+extern Compensate_t compensate;
 
 #endif
 

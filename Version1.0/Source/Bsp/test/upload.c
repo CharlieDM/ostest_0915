@@ -6,6 +6,8 @@
 #include "string.h"
 #include "usart.h"
 
+Compensate_t compensate = {0};
+
 u8 uart_tx_buf[255] ={0};
 void send_result(void)
 {
@@ -19,20 +21,21 @@ void comm_process(void)
 
 void read_param(void)
 {
-	u8 temp,i;
-	temp=AT24CXX_ReadOneByte(EEPROM_FLAG_ADDR);			   
-	if(temp != EEPROM_FLAG)
+	u8 temp;
+    u16 i;
+	temp=AT24CXX_ReadOneByte(EE_FLAG_ADDR);			   
+	if(temp != EE_FLAG)
 	{
-		for(i=0; i<EEPROM_FLAG_ADDR-1; i++)
-		{
-			AT24CXX_WriteOneByte(i,0);
-		}
-		AT24CXX_WriteOneByte(EEPROM_FLAG_ADDR,EEPROM_FLAG);
+		AT24CXX_WriteOneByte(EE_FLAG_ADDR,EE_FLAG);
+        for(i=0;i<COMPENSATE_NUM+2;i++)
+        {
+            AT24CXX_WriteOneByte(EE_OS_ADDR+i,0);
+        } 
 	}
 	else
 	{
-//		AT24CXX_Read(EEPROM_OS_ADDR,(u8*)(&oscompensate.no),OS_COMPENSATE_NUMBER*5);
-//		AT24CXX_Read(EEPROM_PANEL_ADDR,(u8*)(&panelcompensate.no),10);
+		AT24CXX_Read(EE_OS_ADDR,compensate.open_offset,COMPENSATE_NUM); 
+        AT24CXX_Read(EE_OS_ADDR+2,(u8*)&compensate.short_offset,2); 
 	}
 
 }

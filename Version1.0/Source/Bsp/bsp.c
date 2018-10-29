@@ -20,6 +20,7 @@ void bsp_init(void)
     PWR24V_CTR(OUTPUT_OFF, OFF);
     fct_swtich(FCT_OFF); 
     isolate_switch(ISOLATE_OFF); 
+    read_param(); 
     
 //    fct_swtich(FCT_4W_EN5);
 //    

@@ -17,6 +17,8 @@
 #include "tim.h"
 #include "usart.h"
 #include "fct.h"
+#include "upload.h"
+#include "24cxx.h" 
 
 #define KEY_START				DIN1
 #define KEY_MENU				DIN2

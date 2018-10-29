@@ -49,7 +49,7 @@ void panel_test(void)
         adcx = tm7705_read_data(CHIP0,CHANNEL1);
         w4_v = (adcx-32767)*5000/65535; /* mv */
         w4_res = w4_v/w4_cur;
-        if(w4_res > THRESHOLD_PANEL)
+        if(w4_res > THRESHOLD_PANEL + compensate.open_offset[0])
         {
             item_result[test_result.times].data = w4_res;
             item_result[test_result.times].tp1 = tp1;
@@ -65,6 +65,7 @@ void panel_test(void)
             item_result[test_result.times].result = PASS;
         }
     }
+    test_result.times++;
     
     /* panel 2 */
     isolate_switch(ISOLATE_2);
@@ -79,7 +80,7 @@ void panel_test(void)
         adcx = tm7705_read_data(CHIP0,CHANNEL1);
         w4_v = (adcx-32767)*5000/65535; /* mv */
         w4_res = w4_v/w4_cur;
-        if(w4_res > THRESHOLD_PANEL)
+        if(w4_res > THRESHOLD_PANEL + compensate.open_offset[1])
         {
             item_result[test_result.times].data = w4_res;
             item_result[test_result.times].tp1 = tp1;
@@ -95,6 +96,7 @@ void panel_test(void)
             item_result[test_result.times].result = PASS;
         }
     }
+    test_result.times++;
     
     isolate_switch(ISOLATE_OFF);
     fct_swtich(FCT_OFF);
@@ -116,7 +118,7 @@ void os_test(void)
 		for(j=0; j<3; j++)
 		{
 			value = fct_get_data(FCT_ADC3_IN);
-			if( value > THRESHOLD_OPEN )
+			if( value > THRESHOLD_OPEN + compensate.open_offset[test_result.times])
 			{
 				item_result[test_result.times].data = value;
 				item_result[test_result.times].tp1 = tp1;
@@ -132,8 +134,7 @@ void os_test(void)
 				item_result[test_result.times].result = PASS;
 			}
 		}
-		test_result.times++;
-		
+		test_result.times++;	
 	}
 
 	/* short test 10connector */
@@ -147,7 +148,7 @@ void os_test(void)
 		for(j=0; j<3; j++)
 		{
 			value = fct_get_data(FCT_ADC2_IN);
-			if( value < THRESHOLD_SHORT )
+			if( value < THRESHOLD_SHORT + compensate.short_offset)
 			{
 				item_result[test_result.times].data = value;
 				item_result[test_result.times].tp1 = tp1;
@@ -177,7 +178,7 @@ void os_test(void)
 		for(j=0; j<3; j++)
 		{
 			value = fct_get_data(FCT_ADC2_IN);
-			if( value < THRESHOLD_SHORT )
+			if( value < THRESHOLD_SHORT + compensate.short_offset)
 			{
 				item_result[test_result.times].data = value;
 				item_result[test_result.times].tp1 = tp1;
@@ -209,7 +210,7 @@ void os_test(void)
 			for(j=0; j<3; j++)
 			{
 				value = fct_get_data(FCT_ADC2_IN);
-				if( value < THRESHOLD_SHORT )
+				if( value < THRESHOLD_SHORT + compensate.short_offset)
 				{
 					item_result[test_result.times].data = value;
 					item_result[test_result.times].tp1 = tp1;
