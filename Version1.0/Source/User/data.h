@@ -36,8 +36,8 @@ typedef struct _test_result_t
 
 typedef struct  _compensate_t
 {
-	u8 open_offset[COMPENSATE_NUM];
-    u16 short_offset;
+	s16 open_offset[COMPENSATE_NUM];
+    s16 short_offset;
 }Compensate_t;
 
 extern Item_result_t item_result[1000];

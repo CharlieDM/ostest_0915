@@ -1,7 +1,7 @@
 #include "tim.h"
 #include "usart.h"
 
-uint8_t Rec_OK_USART2 = 0;
+uint8_t rx4_rec_OK = 0;
 
 void TIM_Int_Init(void)
 {
@@ -31,7 +31,7 @@ void TIM3_IRQHandler(void)
 	{
 		TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
 		timer_disable(3);
-		Rec_OK_USART2= 1;	
+		rx4_rec_OK= 1;	
 	}
 }
 

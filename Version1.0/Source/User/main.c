@@ -36,7 +36,9 @@ int main(void)
                 break;
             
             default: break;
-        }        
+        }  
+
+		comm_process();
     }
 }
 

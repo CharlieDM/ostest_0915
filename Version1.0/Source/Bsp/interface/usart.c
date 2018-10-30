@@ -2,8 +2,8 @@
 #include "tim.h"
 #include "io.h"
 
-DataTypedef rxdata2={0};
-uint8_t RX2_Buff[30];
+DataTypedef rx4_data={0};
+uint8_t rx4_buff[30];
 
 void uart_init(u32 bound){
 	//GPIO∂Àø⁄…Ë÷√
@@ -11,7 +11,7 @@ void uart_init(u32 bound){
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
     
-	data_init(&rxdata2, RX2_Buff, sizeof(RX2_Buff));
+	data_init(&rx4_data, rx4_buff, sizeof(rx4_buff));
 	
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);	
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);	
@@ -52,7 +52,7 @@ void UART4_IRQHandler(void)
 	if(USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
 	{
 		USART_ClearITPendingBit(UART4, USART_IT_RXNE);
-		rxdata2.push(&rxdata2, USART_ReceiveData(UART4));
+		rx4_data.push(&rx4_data, USART_ReceiveData(UART4));
 		timer_enable(3);
 	}	
 } 
