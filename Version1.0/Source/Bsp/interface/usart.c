@@ -3,7 +3,7 @@
 #include "io.h"
 
 DataTypedef rx4_data={0};
-uint8_t rx4_buff[30];
+uint8_t rx4_buf[30];
 
 void uart_init(u32 bound){
 	//GPIO∂Àø⁄…Ë÷√
@@ -11,7 +11,7 @@ void uart_init(u32 bound){
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
     
-	data_init(&rx4_data, rx4_buff, sizeof(rx4_buff));
+	data_init(&rx4_data, rx4_buf, sizeof(rx4_buf));
 	
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);	
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);	

@@ -545,11 +545,6 @@
               <FilePath>..\Source\Bsp\dev\tpswitch.c</FilePath>
             </File>
             <File>
-              <FileName>res.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Source\Bsp\dev\res.c</FilePath>
-            </File>
-            <File>
               <FileName>io.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Source\Bsp\dev\io.c</FilePath>

@@ -58,6 +58,15 @@ void show_page(u8 page)
     len = number_to_str(temp,item_result[page].data);
 	str_reverse(temp,temp_str,len);
     lcd12864_display_char(2,3,temp_str); 
+    
+    if(item_result[page].res_uint == UINT_0R)
+    {
+        lcd12864_display_char(3,0,(u8*)"Uint: ŷ"); 
+    }
+    else
+    {
+        lcd12864_display_char(3,0,(u8*)"Uint: ǧŷ"); 
+    }
 }
 
 void show_error(u16 type)

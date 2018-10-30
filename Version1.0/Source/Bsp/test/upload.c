@@ -36,7 +36,6 @@ static void comm_nack(void)
 	rx4_tx_len = 2;
 }
 
-
 void comm_send(void)
 {
 	u8 i=0,checksum=0;
@@ -53,7 +52,7 @@ void comm_send(void)
 void comm_user(u8 *data)
 {
 	u8 cmd = *(data+2);
-	switch()
+	switch(cmd)
 	{
 		case USER_QUERY_FLAG:
 			if(test_result.complete_flag)
@@ -71,7 +70,7 @@ void comm_user(u8 *data)
 			break;
 
 		case USER_WR_OFFSET:
-
+            comm_ack();
 			break;
 
 		default:
@@ -84,10 +83,10 @@ void comm_process(void)
 	u8 pos=0,len=0,rx_buf[40] = {0};
 	if(rx4_rec_OK)
 	{
-		len = rx4_data.length();
+		len = rx4_data.length(&rx4_data);
 		if(len)
 		{
-			rx4_data.read(rx4_data,rx_buf,len);
+			rx4_data.read(&rx4_data,rx_buf,len);
 			while( pos < len)
 			{
 				if( rx_buf[pos] == USER_HEAD ) break;
@@ -122,7 +121,7 @@ void read_param(void)
 	}
 	else
 	{
-		AT24CXX_Read(EE_OS_ADDR,compensate.open_offset,COMPENSATE_NUM*2); 
+		AT24CXX_Read(EE_OS_ADDR,(u8*)&compensate.open_offset,COMPENSATE_NUM*2); 
         AT24CXX_Read(EE_OS_ADDR+84,(u8*)&compensate.short_offset,2); 
 	}
 }

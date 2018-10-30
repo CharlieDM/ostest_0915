@@ -1,8 +1,7 @@
 
 #include "bsp.h"
 
-u16 data1 = 0;
-u16 data2 = 0;
+u16 res = 0;
 void bsp_init(void) 
 { 
  	delay_init();
@@ -35,4 +34,15 @@ void bsp_init(void)
 //        data2 = tm7705_read_data(CHIP0,CHANNEL1);
 //        delay_ms(100);
 //    }
+//    fct_swtich(FCT_100R_EN3);
+//    
+//    switch_testpoint(TPA,1);
+//    switch_testpoint(TPB,5);
+//    
+//    while(1)
+//    {
+//        res = fct_get_data(FCT_ADC3_IN);
+//        delay_ms(100);
+//    }
+
 }

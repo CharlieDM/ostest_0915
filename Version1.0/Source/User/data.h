@@ -11,6 +11,9 @@
 #define PASS			(0)
 #define FAIL			(1)
 
+#define UINT_0R         (0)
+#define UINT_1KR        (1)
+
 typedef enum 
 {
     WAIT_START = 0,
@@ -24,6 +27,7 @@ typedef struct  _item_result_t
 	u8 tp1;
 	u8 tp2;
 	u16 data;
+    u8 res_uint;
 }Item_result_t;
 
 typedef struct _test_result_t

@@ -124,7 +124,9 @@ void os_test(void)
 				item_result[test_result.times].tp1 = tp1;
 				item_result[test_result.times].tp2 = tp2;
 				item_result[test_result.times].result = FAIL;
+                item_result[test_result.times].res_uint = UINT_0R;
 				test_result.all_result = FAIL;
+                
 			}
 			else
 			{
@@ -132,6 +134,7 @@ void os_test(void)
 				item_result[test_result.times].tp1 = tp1;
 				item_result[test_result.times].tp2 = tp2;
 				item_result[test_result.times].result = PASS;
+                item_result[test_result.times].res_uint = UINT_0R;
 			}
 		}
 		test_result.times++;	
@@ -154,6 +157,7 @@ void os_test(void)
 				item_result[test_result.times].tp1 = tp1;
 				item_result[test_result.times].tp2 = tp2;
 				item_result[test_result.times].result = FAIL;
+                item_result[test_result.times].res_uint = UINT_1KR;
 				test_result.all_result = FAIL;
 			}
 			else
@@ -162,6 +166,7 @@ void os_test(void)
 				item_result[test_result.times].tp1 = tp1;
 				item_result[test_result.times].tp2 = tp2;
 				item_result[test_result.times].result = PASS;
+                item_result[test_result.times].res_uint = UINT_1KR;
 			}
 		}
 		test_result.times++;
@@ -184,6 +189,7 @@ void os_test(void)
 				item_result[test_result.times].tp1 = tp1;
 				item_result[test_result.times].tp2 = tp2;
 				item_result[test_result.times].result = FAIL;
+                item_result[test_result.times].res_uint = UINT_1KR;
 				test_result.all_result = FAIL;
 			}
 			else
@@ -192,6 +198,7 @@ void os_test(void)
 				item_result[test_result.times].tp1 = tp1;
 				item_result[test_result.times].tp2 = tp2;
 				item_result[test_result.times].result = PASS;
+                item_result[test_result.times].res_uint = UINT_1KR;
 			}
 		}
 		test_result.times++;
@@ -216,6 +223,7 @@ void os_test(void)
 					item_result[test_result.times].tp1 = tp1;
 					item_result[test_result.times].tp2 = tp2;
 					item_result[test_result.times].result = FAIL;
+                    item_result[test_result.times].res_uint = UINT_1KR;
 					test_result.all_result = FAIL;
 				}
 				else
@@ -224,6 +232,7 @@ void os_test(void)
 					item_result[test_result.times].tp1 = tp1;
 					item_result[test_result.times].tp2 = tp2;
 					item_result[test_result.times].result = PASS;
+                    item_result[test_result.times].res_uint = UINT_1KR;
 				}
 			}
 			test_result.times++;
