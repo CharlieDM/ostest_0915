@@ -38,6 +38,7 @@ void show_page(u8 page)
     lcd12864_clear_line(0);
     lcd12864_clear_line(1);
 	lcd12864_clear_line(2);
+    lcd12864_clear_line(3);
     
     /* tp1 */
     lcd12864_display_char(0,0,TP1_STR);  
@@ -104,6 +105,13 @@ void show_find_point(void)
     lcd12864_clear();
     lcd12864_display_char(0,0,FIND_STR); 
     
+    PWR24V_CTR(CYLINDER_3_ON, ON);
+    delay_ms(200);
+    PWR24V_CTR(CYLINDER_1_ON, ON); 
+    delay_ms(200);
+    PWR24V_CTR(CYLINDER_2_ON, ON); 
+    PWR24V_CTR(CYLINDER_3_OFF, OFF);
+    
 	while (1)
 	{
 		/* find point */
@@ -130,10 +138,23 @@ void show_find_point(void)
             memset(temp_str,0x20,48);			
 			memset(point,0,86);
 		}
+        else
+        {
+            lcd12864_clear_line(1);
+            lcd12864_clear_line(2);
+            lcd12864_clear_line(3);
+        }
 		/* check key */
 		key = show_key_scan();
 		if(key == KEY_MENU_SHORT) break;
 	}
+    
+    /* release inhale */
+    PWR24V_CTR(CYLINDER_2_OFF, OFF);
+    delay_ms(100);
+    PWR24V_CTR(CYLINDER_1_OFF, OFF);
+    delay_ms(100);
+    PWR24V_CTR(CYLINDER_3_OFF, OFF);
 }
 
 void show_main(void)
@@ -147,12 +168,13 @@ void show_main(void)
 			if(test_result.complete_flag)
 			{
 				show_page(page);
-				if(++page > test_result.times) page = 0;
+				if(++page >= test_result.err_times) page = 0;
 			}
 			break;
 
 		case KEY_MENU_LONG:
 			show_find_point();
+            show_init();
 			break;
 			
 		default: break;
@@ -162,13 +184,19 @@ void show_main(void)
 
 void show_init(void)
 {
+    lcd12864_clear_line(0);
     lcd12864_clear_line(1);
+    lcd12864_clear_line(2);
+    lcd12864_clear_line(3);
     lcd12864_display_char(1,2,WELCOME_STR);
 }
 
 void show_test(void)
 {
+    lcd12864_clear_line(0);
     lcd12864_clear_line(1);
+    lcd12864_clear_line(2);
+    lcd12864_clear_line(3);
     lcd12864_display_char(1,2,TEST_STR);
 	PWR24V_CTR(LED_PASS_OFF, OFF);
 	PWR24V_CTR(LED_FAIL_OFF, OFF);
@@ -176,13 +204,19 @@ void show_test(void)
 
 void show_pass(void)
 {
+    lcd12864_clear_line(0);
     lcd12864_clear_line(1);
+    lcd12864_clear_line(2);
+    lcd12864_clear_line(3);
     lcd12864_display_char(1,3,PASS_STR);
 }
 
 void show_fail(void)
 {
+    lcd12864_clear_line(0);
     lcd12864_clear_line(1);
+    lcd12864_clear_line(2);
+    lcd12864_clear_line(3);
     lcd12864_display_char(1,3,FAIL_STR);
 }
 

@@ -22,12 +22,15 @@ uint16_t fct_get_data(FCT_ADC_TYPE ftype)
 			adcx = get_adc(ftype);
 			restmp = RES_1M*adcx/(ADC_RESOL-adcx);
             if(restmp>RES_20M) res = RES_20M;
+            else res = restmp;        
 			break;
 
 		case FCT_ADC3_IN:
 			adcx = get_adc(ftype);
             restmp = (RES_100R*adcx)/(ADC_RESOL - adcx) - RES_100R;
             if(restmp>RES_999R) res = RES_999R;
+            else res = restmp;
+            if(res >= 6) res = res -5;
 			break;
 
 		case FCT_ADC4_IN:

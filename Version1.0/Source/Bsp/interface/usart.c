@@ -44,7 +44,9 @@ void uart_init(u32 bound){
 
 	USART_Init(UART4, &USART_InitStructure); 
 	USART_ITConfig(UART4, USART_IT_RXNE, ENABLE);
-	USART_Cmd(UART4, ENABLE);                   
+	USART_Cmd(UART4, ENABLE);    
+		USART_ClearFlag(UART4,USART_FLAG_TC);    
+ 
 }
 
 void UART4_IRQHandler(void)             

@@ -1,7 +1,7 @@
 
 #include "bsp.h"
 
-u16 res = 0;
+
 void bsp_init(void) 
 { 
  	delay_init();
@@ -21,11 +21,33 @@ void bsp_init(void)
     isolate_switch(ISOLATE_OFF); 
     read_param(); 
     
+//    while(1)
+//    {
+//        uart_puts(UART4,&data,1);
+//        delay_ms(1000);
+//    }
+    
+    
+//    PWR24V_CTR(CYLINDER_3_ON, ON);
+//    delay_ms(200);
+//    PWR24V_CTR(CYLINDER_1_ON, ON); 
+//    delay_ms(200);
+//    PWR24V_CTR(CYLINDER_2_ON, ON); 
+//    PWR24V_CTR(CYLINDER_3_OFF, OFF);
+//    
+//    fct_swtich(FCT_100R_EN3);
+//    switch_testpoint(TPA,85);
+//    switch_testpoint(TPB,66);
+//    
+//    data1 =  fct_get_data(FCT_ADC3_IN);
+        
+//    isolate_switch(ISOLATE_1);
+//    isolate_switch(ISOLATE_2);
+//    
+//    SW_3D3V_Out(PWR_1D8V_ON);
 //    fct_swtich(FCT_4W_EN5);
-//    
-//    switch_testpoint(TPA,1);
-//    switch_testpoint(TPB,5);
-//    
+    
+    
 //    while(1)
 //    {
 

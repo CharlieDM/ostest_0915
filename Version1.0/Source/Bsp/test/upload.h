@@ -4,7 +4,7 @@
 #include "sys.h"
 
 #define EE_FLAG_ADDR		(0)
-#define EE_FLAG				(0x55)
+#define EE_FLAG				(0xAA)
 #define EE_OS_ADDR			(1)
 
 #define USER_HEAD			(0x86)

@@ -20,11 +20,11 @@
 #define OUTPUT7_OFF		(u8)(~OUTPUT7_ON)
 #define OUTPUT8_OFF		(u8)(~OUTPUT8_ON)
 
-#define ISOLATE_OFF     0xFF
-#define ISOLATE_1       0xFC
-#define ISOLATE_2       0xF3
-#define ISOLATE_3       0xCF
-#define ISOLATE_4       0x3F
+#define ISOLATE_OFF     0
+#define ISOLATE_1       0x03
+#define ISOLATE_2       0x0C
+#define ISOLATE_3       0x30
+#define ISOLATE_4       0xC0
 
 #define OFF             (0)
 #define ON              (1)

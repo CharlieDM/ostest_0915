@@ -33,6 +33,7 @@ typedef struct  _item_result_t
 typedef struct _test_result_t
 {
 	u16 times;
+    u16 err_times;
 	u8 all_result;
 	u8 complete_flag;
 	
@@ -44,9 +45,11 @@ typedef struct  _compensate_t
     s16 short_offset;
 }Compensate_t;
 
-extern Item_result_t item_result[1000];
+extern Item_result_t item_result[200];
+extern Item_result_t upload_result[100];
 extern Test_result_t test_result;
 extern Compensate_t compensate;
+extern u8 test_point[97];
 
 #endif
 

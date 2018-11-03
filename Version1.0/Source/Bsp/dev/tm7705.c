@@ -34,16 +34,17 @@ void tm7705_init(TM7705_CHIP chip)
 	}
     delay_ms(1); 
 
-	spi3_readwrite_byte(0x20); delay_us(300); /* 写通讯寄存器,选中c时钟寄存器*/
-	spi3_readwrite_byte(0x0C); delay_us(300); /* 4.9152时钟，100Hz数据更新速率 */  
-	spi3_readwrite_byte(0x10); delay_us(300); /*选择设置寄存器,使用channel 1*/ 
-	spi3_readwrite_byte(0x40); delay_us(300); /*写设置寄存器 ,设置成单极性、无缓冲、增益为1、滤波器工作、自校准*/
-        
-	spi3_readwrite_byte(0x21); delay_us(300); /* 写通讯寄存器,选中c时钟寄存器*/
-	spi3_readwrite_byte(0x0C); delay_us(300); /* 4.9152时钟，20Hz数据更新速率 */  
-	spi3_readwrite_byte(0x11); delay_us(300); /*选择设置寄存器,使用channel 2*/ 
-	spi3_readwrite_byte(0x40); delay_us(300); /*写设置寄存器 ,设置成单极性、无缓冲、增益为1、滤波器工作、自校准*/
-	
+	spi3_readwrite_byte(0x20); delay_us(500); /* 写通讯寄存器,选中c时钟寄存器*/
+	spi3_readwrite_byte(0x0C); delay_us(500); /* 4.9152时钟，100Hz数据更新速率 */  
+	spi3_readwrite_byte(0x10); delay_us(500); /*选择设置寄存器,使用channel 1*/ 
+	spi3_readwrite_byte(0x40); delay_us(500); /*写设置寄存器 ,设置成单极性、无缓冲、增益为1、滤波器工作、自校准*/
+    delay_ms(500);
+    
+	spi3_readwrite_byte(0x21); delay_us(500); /* 写通讯寄存器,选中c时钟寄存器*/
+	spi3_readwrite_byte(0x0C); delay_us(500); /* 4.9152时钟，20Hz数据更新速率 */  
+	spi3_readwrite_byte(0x11); delay_us(500); /*选择设置寄存器,使用channel 2*/ 
+	spi3_readwrite_byte(0x40); delay_us(500); /*写设置寄存器 ,设置成单极性、无缓冲、增益为1、滤波器工作、自校准*/
+	delay_ms(500);
 	/* set CS = 1 */
 	if(chip == CHIP0)
 		GPIO_SetBits(TM7705_CS_0);

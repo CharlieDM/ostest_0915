@@ -114,7 +114,7 @@ void read_param(void)
 	if(temp != EE_FLAG)
 	{
 		AT24CXX_WriteOneByte(EE_FLAG_ADDR,EE_FLAG);
-        for(i=0;i<COMPENSATE_NUM+2;i++)
+        for(i=0;i<COMPENSATE_NUM*2+2;i++)
         {
             AT24CXX_WriteOneByte(EE_OS_ADDR+i,0);
         } 
