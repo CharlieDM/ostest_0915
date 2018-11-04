@@ -11,6 +11,7 @@
 #define TP1_STR     		(u8*)"TP1:"
 #define TP2_STR     		(u8*)"TP2:"
 #define DATA_STR    		(u8*)"Data:"
+#define TITLE               (u8*)"TP1 TP2 DATA RES"
 
 static u8 page = 0;
 
@@ -31,6 +32,40 @@ u8 show_key_scan(void)
 	return 0;
 }
 
+void show_item(u8 line, u8 page)
+{
+    u8 temp[10] = {0};
+	u8 len=0,temp_str[10] = {0};
+    
+    len = number_to_str(temp,error_result[page].tp1);
+	str_reverse(temp,temp_str,len);
+    lcd12864_display_char(line,0,temp_str); 
+    memset(temp,0,6);
+    
+    len = number_to_str(temp,error_result[page].tp2);
+	str_reverse(temp,temp_str,len);
+    lcd12864_display_char(line,2,temp_str); 
+    memset(temp,0,6);
+    
+    len = number_to_str(temp,error_result[page].data);
+	str_reverse(temp,temp_str,len);
+    lcd12864_display_char(line,4,temp_str);
+}
+
+void show_page1(u8 page)
+{
+    
+    lcd12864_clear_line(0);
+    lcd12864_clear_line(1);
+	lcd12864_clear_line(2);
+    lcd12864_clear_line(3);
+    
+    lcd12864_display_char(0,0,TITLE);
+    show_item(1,page);
+    show_item(2,page+1);
+    show_item(3,page+2);
+}
+
 void show_page(u8 page)
 {
     u8 temp[10] = {0};
@@ -42,25 +77,25 @@ void show_page(u8 page)
     
     /* tp1 */
     lcd12864_display_char(0,0,TP1_STR);  
-    len = number_to_str(temp,item_result[page].tp1);
+    len = number_to_str(temp,error_result[page].tp1);
 	str_reverse(temp,temp_str,len);
     lcd12864_display_char(0,3,temp_str); 
     memset(temp,0,6);
     
     /* tp2 */
     lcd12864_display_char(1,0,TP2_STR);
-    len = number_to_str(temp,item_result[page].tp2);
+    len = number_to_str(temp,error_result[page].tp2);
 	str_reverse(temp,temp_str,len);
     lcd12864_display_char(1,3,temp_str); 
     memset(temp,0,6);
     
     /* data */
     lcd12864_display_char(2,0,DATA_STR);
-    len = number_to_str(temp,item_result[page].data);
+    len = number_to_str(temp,error_result[page].data);
 	str_reverse(temp,temp_str,len);
     lcd12864_display_char(2,3,temp_str); 
     
-    if(item_result[page].res_uint == UINT_0R)
+    if(error_result[page].res_uint == UINT_0R)
     {
         lcd12864_display_char(3,0,(u8*)"Uint: ŷ"); 
     }

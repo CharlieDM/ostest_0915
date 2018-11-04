@@ -2,6 +2,7 @@
 #include "pwrctr.h"
 #include "74HC595.h"
 #include "io.h"
+#include "delay.h"
 
 #define	SW_1D8V			SW_1D8V_PORT, SW_1D8V_PIN
 #define SW_3D3V			SW_3D3V_PORT, SW_3D3V_PIN
@@ -59,6 +60,7 @@ void fct_swtich(FCT_EN_TYPE ftype)
         {GPIO_SetBits(FCT_EN5); GPIO_ResetBits(FCT_EN1); GPIO_ResetBits(FCT_EN2); GPIO_ResetBits(FCT_EN3); GPIO_ResetBits(FCT_EN4);}	
     else if(ftype == FCT_OFF)	    
         { GPIO_ResetBits(FCT_EN1); GPIO_ResetBits(FCT_EN2); GPIO_ResetBits(FCT_EN3);GPIO_ResetBits(FCT_EN4); GPIO_ResetBits(FCT_EN5);}  
+    delay_ms(10);
 }
 
 

@@ -3,7 +3,7 @@
 #include "ostest.h"
 
 eSysState state = WAIT_START;
-u8 data = 55;
+
 int main(void)
 {	
     /* bsp init */

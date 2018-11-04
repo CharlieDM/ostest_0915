@@ -6,7 +6,7 @@
 #define FAIL_STR        (u8*)"Fail"
 
 #define TEST_POINT_NUMBER			(86)
-#define COMPENSATE_NUM              (42)
+#define COMPENSATE_NUM              (52)
 
 #define PASS			(0)
 #define FAIL			(1)
@@ -20,7 +20,7 @@ typedef enum
     ON_TEST,
 }eSysState;
 
-typedef struct  _item_result_t
+typedef struct  _error_result_t
 {
 	u16 no;
 	u8 result;
@@ -28,7 +28,7 @@ typedef struct  _item_result_t
 	u8 tp2;
 	u16 data;
     u8 res_uint;
-}Item_result_t;
+}error_result_t;
 
 typedef struct _test_result_t
 {
@@ -45,8 +45,8 @@ typedef struct  _compensate_t
     s16 short_offset;
 }Compensate_t;
 
-extern Item_result_t item_result[200];
-extern Item_result_t upload_result[100];
+extern error_result_t error_result[200];
+extern error_result_t upload_result[200];
 extern Test_result_t test_result;
 extern Compensate_t compensate;
 extern u8 test_point[97];

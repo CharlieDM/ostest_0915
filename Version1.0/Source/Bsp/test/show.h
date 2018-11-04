@@ -13,6 +13,7 @@ void show_error(u16 type);
 void show_pass(void);
 void show_fail(void);
 void show_test_times(void);
+void show_page1(u8 page);
 void show_page(u8 page);
 void show_find_point(void);
 

@@ -6,8 +6,8 @@
 #include "show.h"
 
 /* gobal var */
-Item_result_t item_result[200] = {0};
-Item_result_t upload_result[100] = {0};
+error_result_t error_result[200] = {0};
+error_result_t upload_result[200] = {0};
 Test_result_t test_result = {0};
 
 /*2 40 10pin 30pin 40pad*/
@@ -19,18 +19,18 @@ OsChain_t painchain[PANEL_2_LEN] =
 
 OsChain_t open_40_chain[CHAIN_50_LEN] = 
 {
-    {2,{1,65}}, {2,{2,12}}, {2,{12,71}},{2,{71,72}},
-    {2,{3,56}}, {2,{4,55}}, {2,{5,46}}, {2,{6,8}},
-    {2,{8,19}}, {2,{19,32}},{2,{32,66}},{2,{66,52}},
-    {2,{52,35}},{2,{35,40}},{2,{40,43}},{2,{43,44}},
-    {2,{44,76}},{2,{76,75}},{2,{7,47}}, {2,{9,79}},
-    {2,{10,80}},{2,{11,67}},{2,{13,63}},{2,{14,59}},
-    {2,{15,57}},{2,{16,54}},{2,{17,51}},{2,{18,45}},
-    {2,{20,77}},{2,{21,78}},{2,{22,68}},{2,{23,73}},
-    {2,{73,74}},{2,{74,36}},{2,{24,64}},{2,{25,60}},
-    {2,{26,58}},{2,{27,50}},{2,{29,49}},{2,{30,41}},
-    {2,{41,82}},{2,{82,81}},{2,{31,42}},{2,{42,84}},
-    {2,{84,83}},{2,{61,38}},{2,{69,34}},{2,{70,33}},
+    {2,{1,65}}, {2,{2,12}}, {2,{12,71}},{2,{71,72}}, //1
+    {2,{3,56}}, {2,{4,55}}, {2,{5,46}}, {2,{6,8}},   //2
+    {2,{8,19}}, {2,{19,32}},{2,{32,66}},{2,{66,52}}, //3
+    {2,{52,35}},{2,{35,40}},{2,{40,43}},{2,{43,44}}, //4
+    {2,{44,76}},{2,{76,75}},{2,{7,47}}, {2,{9,79}},  //5
+    {2,{10,80}},{2,{11,67}},{2,{13,63}},{2,{14,59}}, //6
+    {2,{15,57}},{2,{16,54}},{2,{17,51}},{2,{18,45}}, //7
+    {2,{20,77}},{2,{21,78}},{2,{22,68}},{2,{23,73}}, //8
+    {2,{73,74}},{2,{74,36}},{2,{24,64}},{2,{25,60}}, //9
+    {2,{26,58}},{2,{27,50}},{2,{29,49}},{2,{30,41}}, //10
+    {2,{41,82}},{2,{82,81}},{2,{31,42}},{2,{42,84}}, //11
+    {2,{84,83}},{2,{61,38}},{2,{69,34}},{2,{70,33}}, //12
     {2,{62,37}},{2,{48,39}},
 };
 /* 40 point 1 to 1 test*/
@@ -64,7 +64,7 @@ u8 wait_start_sign(void)
 
 void panel_test(void)
 {
-    u8 j=0;
+    u8 j=0,temp_tresult;
     u16 tp1=0,tp2=0,adcx=0;
     float w4_v=0,w4_cur=0,w4_res=0,value=0;
     
@@ -73,7 +73,7 @@ void panel_test(void)
 	tp2 = painchain[0].point[1];
     switch_testpoint(TPA,tp1);
     switch_testpoint(TPB,tp2);
-    delay_ms(2);
+    delay_ms(10);
     value = fct_get_data(FCT_ADC3_IN);
     if(value < 20)
     {
@@ -94,29 +94,35 @@ void panel_test(void)
                   
             if(w4_res > THRESHOLD_PANEL + compensate.open_offset[0])
             {
-                item_result[test_result.err_times].data = w4_res;
-                item_result[test_result.err_times].tp1 = tp1;
-				item_result[test_result.err_times].tp2 = tp2;
-                item_result[test_result.err_times].result = FAIL;
-                test_result.all_result = FAIL;
-                if(j==TEST_TIMES-1) test_result.err_times++;  
-                delay_ms(10);  
+                temp_tresult = 1;
+                delay_ms(10);
             }
             else
             {
+                temp_tresult = 0;
                 break;
             }
         }
     }
     else
     {
-        item_result[test_result.err_times].data = 999;
-        item_result[test_result.err_times].tp1 = tp1;
-        item_result[test_result.err_times].tp2 = tp2;
-        item_result[test_result.err_times].result = FAIL;
-        test_result.all_result = FAIL;
-        test_result.err_times++;  
+        temp_tresult = 1; 
     }
+    if(temp_tresult)
+    {
+        error_result[test_result.err_times].data = value;
+        error_result[test_result.err_times].tp1 = tp1;
+        error_result[test_result.err_times].tp2 = tp2;
+        error_result[test_result.err_times].result = FAIL;
+        error_result[test_result.err_times].res_uint = UINT_0R;
+        test_result.err_times++;
+    }
+    upload_result[test_result.times].data = value;
+    upload_result[test_result.times].tp1 = tp1;
+    upload_result[test_result.times].tp2 = tp2;
+    upload_result[test_result.times].result = FAIL;
+    upload_result[test_result.times].res_uint = UINT_0R;
+    test_result.times++;
      
     /* panel 2 */
     fct_swtich(FCT_100R_EN3);
@@ -124,11 +130,11 @@ void panel_test(void)
 	tp2 = painchain[1].point[1];
     switch_testpoint(TPA,tp1);
     switch_testpoint(TPB,tp2);
-    delay_ms(8);
+    delay_ms(10);
     value = fct_get_data(FCT_ADC3_IN);
     if(value < 20)
     {
-        fct_swtich(FCT_4W_EN5);
+        fct_swtich(FCT_4W_EN5);        
         /* panel 1 */
         isolate_switch(ISOLATE_2);
         for(j=0; j<TEST_TIMES; j++)
@@ -145,29 +151,35 @@ void panel_test(void)
                             
             if(w4_res > THRESHOLD_PANEL + compensate.open_offset[0])
             {
-                item_result[test_result.err_times].data = w4_res;
-                item_result[test_result.err_times].tp1 = tp1;
-				item_result[test_result.err_times].tp2 = tp2;
-                item_result[test_result.err_times].result = FAIL;
-                test_result.all_result = FAIL;
-                if(j==TEST_TIMES-1) test_result.err_times++;            
+                temp_tresult = 1;
+                delay_ms(10);
             }
             else
             {
+                temp_tresult = 0;
                 break;
             }
         }
     }
     else
     {
-        item_result[test_result.err_times].data = 999;
-        item_result[test_result.err_times].tp1 = tp1;
-		item_result[test_result.err_times].tp2 = tp2;
-        item_result[test_result.err_times].result = FAIL;
-        test_result.all_result = FAIL;
-        test_result.err_times++;  
-        delay_ms(10);  
+        temp_tresult = 1; 
     }
+    if(temp_tresult)
+    {
+        error_result[test_result.err_times].data = value;
+        error_result[test_result.err_times].tp1 = tp1;
+        error_result[test_result.err_times].tp2 = tp2;
+        error_result[test_result.err_times].result = FAIL;
+        error_result[test_result.err_times].res_uint = UINT_0R;
+        test_result.err_times++;
+    }
+    upload_result[test_result.times].data = value;
+    upload_result[test_result.times].tp1 = tp1;
+    upload_result[test_result.times].tp2 = tp2;
+    upload_result[test_result.times].result = FAIL;
+    upload_result[test_result.times].res_uint = UINT_0R;
+    test_result.times++;
     
     isolate_switch(ISOLATE_OFF);
     fct_swtich(FCT_OFF);
@@ -175,7 +187,7 @@ void panel_test(void)
 
 void os_test(void)
 {
-	u8 i=0,j=0;
+	u8 i=0,j=0,temp_tresult=0;
 	u16 tp1=0,tp2=0,value=0;
 	
 	/* open test 40pad <-> 10,30connector */
@@ -191,21 +203,31 @@ void os_test(void)
 		{
 			value = fct_get_data(FCT_ADC3_IN);
 			if( value > THRESHOLD_OPEN + compensate.open_offset[test_result.err_times])
-			{
-				item_result[test_result.err_times].data = value;
-				item_result[test_result.err_times].tp1 = tp1;
-				item_result[test_result.err_times].tp2 = tp2;
-				item_result[test_result.err_times].result = FAIL;
-                item_result[test_result.err_times].res_uint = UINT_0R;
-				test_result.all_result = FAIL;
-                if(j==TEST_TIMES-1) test_result.err_times++;   
+			{ 
+                temp_tresult = 1;
                 delay_ms(10);  
 			}
 			else
 			{
+                temp_tresult = 0;
                 break;
 			}
-		}	
+		}
+        if(temp_tresult)
+        {
+            error_result[test_result.err_times].data = value;
+            error_result[test_result.err_times].tp1 = tp1;
+            error_result[test_result.err_times].tp2 = tp2;
+            error_result[test_result.err_times].result = FAIL;
+            error_result[test_result.err_times].res_uint = UINT_0R;
+            test_result.err_times++;
+        }
+        upload_result[test_result.times].data = value;
+        upload_result[test_result.times].tp1 = tp1;
+        upload_result[test_result.times].tp2 = tp2;
+        upload_result[test_result.times].result = FAIL;
+        upload_result[test_result.times].res_uint = UINT_0R;
+        test_result.times++;
 	}
 
 	/* short test 10connector */
@@ -222,20 +244,30 @@ void os_test(void)
 			value = fct_get_data(FCT_ADC2_IN);
 			if( value < THRESHOLD_SHORT + compensate.short_offset)
 			{
-				item_result[test_result.err_times].data = value;
-				item_result[test_result.err_times].tp1 = tp1;
-				item_result[test_result.err_times].tp2 = tp2;
-				item_result[test_result.err_times].result = FAIL;
-                item_result[test_result.err_times].res_uint = UINT_1KR;
-				test_result.all_result = FAIL;
-                if(j==TEST_TIMES-1) test_result.err_times++;  
+                temp_tresult = 1;
                 delay_ms(10);  
 			}
 			else
 			{
+                temp_tresult = 0;
                 break;
 			}
 		}
+        if(temp_tresult)
+        {
+            error_result[test_result.err_times].data = value;
+            error_result[test_result.err_times].tp1 = tp1;
+            error_result[test_result.err_times].tp2 = tp2;
+            error_result[test_result.err_times].result = FAIL;
+            error_result[test_result.err_times].res_uint = UINT_0R;
+            test_result.err_times++;
+        }
+        upload_result[test_result.times].data = value;
+        upload_result[test_result.times].tp1 = tp1;
+        upload_result[test_result.times].tp2 = tp2;
+        upload_result[test_result.times].result = FAIL;
+        upload_result[test_result.times].res_uint = UINT_0R;
+        test_result.times++;
 	}
 
 	/* short test 30connector */
@@ -252,20 +284,30 @@ void os_test(void)
 			value = fct_get_data(FCT_ADC2_IN);
 			if( value < THRESHOLD_SHORT + compensate.short_offset)
 			{
-				item_result[test_result.err_times].data = value;
-				item_result[test_result.err_times].tp1 = tp1;
-				item_result[test_result.err_times].tp2 = tp2;
-				item_result[test_result.err_times].result = FAIL;
-                item_result[test_result.err_times].res_uint = UINT_1KR;
-				test_result.all_result = FAIL;
-                if(j==TEST_TIMES-1) test_result.err_times++;  
-                delay_ms(10);                
+				temp_tresult = 1;
+                delay_ms(10);  
 			}
 			else
 			{
+                temp_tresult = 0;
                 break;
 			}
 		}
+        if(temp_tresult)
+        {
+            error_result[test_result.err_times].data = value;
+            error_result[test_result.err_times].tp1 = tp1;
+            error_result[test_result.err_times].tp2 = tp2;
+            error_result[test_result.err_times].result = FAIL;
+            error_result[test_result.err_times].res_uint = UINT_0R;
+            test_result.err_times++;
+        }
+        upload_result[test_result.times].data = value;
+        upload_result[test_result.times].tp1 = tp1;
+        upload_result[test_result.times].tp2 = tp2;
+        upload_result[test_result.times].result = FAIL;
+        upload_result[test_result.times].res_uint = UINT_0R;
+        test_result.times++;
 	}
 
 	/* short test 40pad */
@@ -281,20 +323,30 @@ void os_test(void)
 			value = fct_get_data(FCT_ADC2_IN);
 			if( value < THRESHOLD_SHORT + compensate.short_offset)
 			{
-				item_result[test_result.err_times].data = value;
-				item_result[test_result.err_times].tp1 = tp1;
-				item_result[test_result.err_times].tp2 = tp2;
-				item_result[test_result.err_times].result = FAIL;
-                item_result[test_result.err_times].res_uint = UINT_1KR;
-				test_result.all_result = FAIL;
-                if(j==TEST_TIMES-1) test_result.err_times++;   
-                delay_ms(10);
+				temp_tresult = 1;
+                delay_ms(10);  
 			}
 			else
 			{
+                temp_tresult = 0;
                 break;
 			}
 		}
+        if(temp_tresult)
+        {
+            error_result[test_result.err_times].data = value;
+            error_result[test_result.err_times].tp1 = tp1;
+            error_result[test_result.err_times].tp2 = tp2;
+            error_result[test_result.err_times].result = FAIL;
+            error_result[test_result.err_times].res_uint = UINT_0R;
+            test_result.err_times++;
+        }
+        upload_result[test_result.times].data = value;
+        upload_result[test_result.times].tp1 = tp1;
+        upload_result[test_result.times].tp2 = tp2;
+        upload_result[test_result.times].result = FAIL;
+        upload_result[test_result.times].res_uint = UINT_0R;
+        test_result.times++;
 	}
 	
     /* fct off */

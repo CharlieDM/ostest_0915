@@ -1,6 +1,7 @@
 
 #include "bsp.h"
 
+u8 temp = 0x99;
 
 void bsp_init(void) 
 { 
@@ -23,7 +24,7 @@ void bsp_init(void)
     
 //    while(1)
 //    {
-//        uart_puts(UART4,&data,1);
+//        printf("sdfsdf");
 //        delay_ms(1000);
 //    }
     
